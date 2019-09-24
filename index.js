@@ -44,9 +44,25 @@ client.on('message', message => {
 	switch(command) {
 
 	case "roll": {
+		// Creates variables for use in the try catch
+		let number;
+		let addition;
 
-		// Gets the number by splitting after the ' d'.
-		const number = message.content.split(" d").slice(1, 3)[0];
+		// For both, tries to process, then if there is nothing there, catches the error
+		try {
+			console.log(args[0]);
+			number = args[0].substring(1);
+		} catch (error) {
+			number = 0;
+		}
+
+		try {
+			console.log(args[1]);
+			addition = args[1].substring(1, args[1].length - 1);
+		} catch (error) {
+			console.log(error);
+			addition = 0;
+		}
 
 		// Because someone is going to eventually do it
 		if (number === "ick") {
@@ -57,6 +73,7 @@ client.on('message', message => {
 
 		// Records number
 		console.log("Input: " + number);
+		console.log("Addition: " + addition);
 
 		/*
 		* Run the dice roll, by taking a value between 0 and 1,
@@ -65,7 +82,12 @@ client.on('message', message => {
 		*/
 		message.channel.send("Rolling a d" + number + ".");
 		var value = Math.floor(Math.random() * (number)) + 1;
-		message.channel.send(value);
+		var modified = (value + parseInt(addition));
+		if (addition === 0) {
+			message.channel.send("Rolled: " + value);
+		} else {
+			message.channel.send("Rolled: " + value + ". With modifier: " + modified);
+		}
 		console.log("Output: " + value);
 		break;
 	}
