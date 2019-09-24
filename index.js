@@ -7,6 +7,14 @@ const fs = require('fs');
 // Runs when activated
 client.once("ready", () => {
 	console.log("Ready!");
+	client.user.setPresence({ game: { name: "Rolling a 1", type: 0 } });
+	client.user.setStatus("online");
+});
+
+// Runs when disconnecting
+client.on("disconnect", () => {
+	console.log("Shutting down");
+	client.user.setStatus("invisible");
 });
 
 // Runs when message is sent
