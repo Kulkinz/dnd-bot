@@ -48,13 +48,6 @@ client.on('message', message => {
 		// Gets the number by splitting after the ' d'.
 		const number = message.content.split(" d").slice(1, 3)[0];
 
-		// Because someone is going to eventually do it
-		if (number === "ick") {
-			message.channel.send("A dick joke? Really " + playerUsername + "? Low... I took a full night to program this bot and you try to make it say dick? Wow... Im disappointed");
-			console.log(playerUsername + " tried to make a dick joke.");
-			break;
-		}
-
 		// Records number
 		console.log(number);
 
@@ -62,16 +55,9 @@ client.on('message', message => {
 		* Run the dice roll, by taking a value between 0 and 1,
 		* multiplying it by the number, adding 1 to it to allow
 		* for 0 and the actual number, then returns it.
-		* Checks to see if it returns a NaN, because that means
-		* someone tried something other than a number.
 		*/
 		message.channel.send("Rolling a d" + number + ".");
 		var value = Math.floor(Math.random() * (number)) + 1;
-		if (value.isNaN) {
-			console.log(number + " was sent to roll command, which didn't work. Sent by " + playerUsername + " at " + date + ".");
-			message.channel.send("Well you did it. You broke it. I don't know how but you did. Logs have been record, alongside your username, punk");
-			break;
-		}
 		message.channel.send(value);
 		console.log(value);
 		break;
