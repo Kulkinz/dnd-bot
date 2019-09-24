@@ -32,9 +32,14 @@ client.on('message', message => {
 	const command = args.shift().toLowerCase();
 	// Username of player
 	const playerUsername = message.author.username;
+	// Time and Date
+	const time = new Date().getTime();
+	const date = new Date(time);
 
 	// To prevent addition processing beyond when called upon. As well as to prevent bots from activating.
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+
+	console.log(playerUsername + " just tried to run " + command + " at " + date);
 
 	switch(command) {
 
