@@ -70,6 +70,26 @@ client.on('message', message => {
 			message.channel.send("I mean, if you have access to the file.");
 		}
 		break;
+
+	case "help":
+
+		// Sends to channel information that it was DM'd
+		message.channel.send("Sent to DMs");
+
+		// Sends to DMs
+		message.author.send("@" + playerUsername + ". The current commands are as follows and I quote;");
+		message.author.send(prefix + "d20");
+		message.author.send("---Rolls a d20");
+
+		// If the user is an owner, sends owner commands
+		if (message.author.id == config.ownerID) {
+			message.author.send("--------ADMIN COMMANDS--------");
+			message.author.send("prefix [Prefix]");
+			message.author.send("--Changes Prefix.");
+		}
+
+		// States that all commands are sent. Sent regardless of owner or not
+		message.author.send("--------END OF COMMANDS--------");
 	}
 });
 
