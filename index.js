@@ -84,8 +84,8 @@ client.on('message', message => {
 		// If the user is an owner, sends owner commands
 		if (message.author.id == config.ownerID) {
 			message.author.send("--------ADMIN COMMANDS--------");
-			message.author.send("prefix [Prefix]");
-			message.author.send("--Changes Prefix.");
+			message.author.send(prefix + "prefix [Prefix]");
+			message.author.send("---Changes Prefix.");
 		}
 
 		// States that all commands are sent. Sent regardless of owner or not
