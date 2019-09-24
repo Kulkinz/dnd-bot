@@ -17,12 +17,17 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
 
-	if (command === "d20") {
+	// To prevent addition processing beyond when called upon. As well as to prevent bots from activating.
+	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+
+	switch(command) {
+
+	case "d20":
 		message.channel.send("Rolling a d20.");
 		var value = Math.floor(Math.random() * (20)) + 1;
 		message.channel.send(value);
 		console.log(value);
-
+		break;
 	}
 });
 
