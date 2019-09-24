@@ -118,6 +118,10 @@ client.on('message', message => {
 		message.author.send("--------END OF COMMANDS--------");
 		break;
 	}
+
+	case "github": {
+		message.channel.send("Code can be found at: https://github.com/Kulkinz/dnd-bot");
+	}
 	}
 });
 
