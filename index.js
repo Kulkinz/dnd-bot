@@ -97,6 +97,11 @@ client.on('message', message => {
 		break;
 	}
 
+	case "github": {
+		message.channel.send("Code can be found at: https://github.com/Kulkinz/dnd-bot. So you know it isn't rigged.");
+		break;
+	}
+
 	case "help": {
 
 		// Sends to channel information that it was DM'd
@@ -104,8 +109,10 @@ client.on('message', message => {
 
 		// Sends to DMs
 		message.author.send("@" + playerUsername + ". The current commands are as follows and I quote;");
-		message.author.send(prefix + "d20");
-		message.author.send("---Rolls a d20");
+		message.author.send(prefix + "roll d[number]");
+		message.author.send("---Rolls a dice up to the given number.");
+		message.author.send(prefix + "github");
+		message.author.send("---Links to the github.");
 
 		// If the user is an owner, sends owner commands
 		if (message.author.id == config.ownerID) {
@@ -117,10 +124,6 @@ client.on('message', message => {
 		// States that all commands are sent. Sent regardless of owner or not
 		message.author.send("--------END OF COMMANDS--------");
 		break;
-	}
-
-	case "github": {
-		message.channel.send("Code can be found at: https://github.com/Kulkinz/dnd-bot");
 	}
 	}
 });
