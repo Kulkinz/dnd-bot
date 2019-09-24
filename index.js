@@ -56,7 +56,7 @@ client.on('message', message => {
 		}
 
 		// Records number
-		console.log(number);
+		console.log("Input: " + number);
 
 		/*
 		* Run the dice roll, by taking a value between 0 and 1,
@@ -66,7 +66,7 @@ client.on('message', message => {
 		message.channel.send("Rolling a d" + number + ".");
 		var value = Math.floor(Math.random() * (number)) + 1;
 		message.channel.send(value);
-		console.log(value);
+		console.log("Output: " + value);
 		break;
 	}
 
