@@ -17,6 +17,11 @@ client.on("disconnect", () => {
 	client.user.setStatus("invisible");
 });
 
+// Error handler
+client.on("error", (e) => console.error(e));
+client.on("warn", (e) => console.warn(e));
+client.on("debug", (e) => console.info(e));
+
 // Runs when message is sent
 client.on('message', message => {
 
