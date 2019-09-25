@@ -63,8 +63,7 @@ client.on('message', message => {
 		}
 
 		// Records number
-		console.log("Input: " + number);
-		console.log("Addition: " + addition);
+		console.log("Input: " + number + " Addition: " + addition);
 
 		/*
 		* Run the dice roll, by taking a value between 0 and 1,
@@ -78,6 +77,67 @@ client.on('message', message => {
 			message.channel.send("Rolled: " + value);
 		} else {
 			message.channel.send("Rolled: " + value + ". With modifier: " + modified);
+		}
+		console.log("Output: " + value);
+		client.user.setPresence({ game: { name: "Rolled a " + value, type: 0 } });
+		break;
+	}
+
+	case "multiroll": {
+		// Creates variables for use in the try catch
+		let number;
+		let times;
+		let addition;
+
+		// For both, tries to process, then if there is nothing there, catches the error
+		try {
+			// Replaces anything not included by the [^] with nothing so that only numbers remain
+			number = args[0].replace(/[^0-9-+]/gi, '');
+		} catch (error) {
+			number = 0;
+		}
+
+		try {
+			times = args[1].replace(/[^0-9]/gi, '');
+		} catch (error) {
+			times = 1;
+		}
+
+		try {
+			addition = args[2].replace(/[^0-9-+]/gi, '');
+		} catch (error) {
+			addition = 0;
+		}
+
+		// Records number
+		console.log("Input: " + number + " Times: " + times + " Addition: " + addition);
+
+		/*
+		* Run the dice roll, by taking a value between 0 and 1,
+		* multiplying it by the number, adding 1 to it to allow
+		* for 0 and the actual number, then returns it.
+		*/
+		message.channel.send("Rolling a d" + number + " " + times + " times.");
+
+		let totalValue = "";
+		let totalModified = "";
+
+		for (let index = 0; index < times; index++) {
+			value = Math.floor(Math.random() * (number)) + 1;
+			modified = (value + parseInt(addition));
+
+			if (index > 0) {
+				totalValue = totalValue + ", ";
+				totalModified = totalModified + ", ";
+			}
+			totalValue = totalValue + value;
+			totalModified = totalModified + modified;
+		}
+		if (addition === 0) {
+			message.channel.send("Rolled: " + totalValue);
+		} else {
+			message.channel.send("Rolled: " + totalValue + ".");
+			message.channel.send("With modifier: " + totalModified + ".");
 		}
 		console.log("Output: " + value);
 		client.user.setPresence({ game: { name: "Rolled a " + value, type: 0 } });
