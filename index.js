@@ -50,18 +50,15 @@ client.on('message', message => {
 
 		// For both, tries to process, then if there is nothing there, catches the error
 		try {
-			console.log(args[0]);
+			// Replaces anything not included by the [^] with nothing so that only numbers remain
 			number = args[0].replace(/[^0-9-+]/gi, '');
 		} catch (error) {
 			number = 0;
 		}
 
 		try {
-			console.log(args[1]);
 			addition = args[1].replace(/[^0-9-+]/gi, '');
-
 		} catch (error) {
-			console.log(error);
 			addition = 0;
 		}
 
