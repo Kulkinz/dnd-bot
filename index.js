@@ -51,14 +51,15 @@ client.on('message', message => {
 		// For both, tries to process, then if there is nothing there, catches the error
 		try {
 			console.log(args[0]);
-			number = args[0].substring(1);
+			number = args[0].replace(/[^0-9-+]/gi, '');
 		} catch (error) {
 			number = 0;
 		}
 
 		try {
 			console.log(args[1]);
-			addition = args[1].substring(1, args[1].length - 1);
+			addition = args[1].replace(/[^0-9-+]/gi, '');
+
 		} catch (error) {
 			console.log(error);
 			addition = 0;
