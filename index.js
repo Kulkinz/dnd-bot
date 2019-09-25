@@ -88,8 +88,9 @@ client.on('message', message => {
 		let number;
 		let times;
 		let addition;
+		let sum;
 
-		// For both, tries to process, then if there is nothing there, catches the error
+		// For all, tries to process, then if there is nothing there, catches the error
 		try {
 			// Replaces anything not included by the [^] with nothing so that only numbers remain
 			number = args[0].replace(/[^0-9-+]/gi, '');
@@ -109,6 +110,12 @@ client.on('message', message => {
 			addition = 0;
 		}
 
+		if (args[3] === "true") {
+			sum = true;
+		} else {
+			sum = false;
+		}
+
 		// Records number
 		console.log("Input: " + number + " Times: " + times + " Addition: " + addition);
 
@@ -116,11 +123,15 @@ client.on('message', message => {
 		* Run the dice roll, by taking a value between 0 and 1,
 		* multiplying it by the number, adding 1 to it to allow
 		* for 0 and the actual number, then returns it.
+		* Loops over with the set amount of times, and if
+		* sum is true, sums up the number.
 		*/
 		message.channel.send("Rolling a d" + number + " " + times + " times.");
 
 		let totalValue = "";
 		let totalModified = "";
+		let totalValueSum = 0;
+		let totalModifiedSum = 0;
 
 		for (let index = 0; index < times; index++) {
 			value = Math.floor(Math.random() * (number)) + 1;
@@ -129,17 +140,24 @@ client.on('message', message => {
 			if (index > 0) {
 				totalValue = totalValue + ", ";
 				totalModified = totalModified + ", ";
+				if (sum === true) {
+					totalValueSum = totalValueSum + value;
+					totalModifiedSum = totalModifiedSum + modified;
+				}
 			}
 			totalValue = totalValue + value;
 			totalModified = totalModified + modified;
 		}
 		if (addition === 0) {
 			message.channel.send("Rolled: " + totalValue);
+			if (sum === true) {message.channel.send("Sum: " + totalValueSum);}
 		} else {
 			message.channel.send("Rolled: " + totalValue + ".");
+			if (sum === true) {message.channel.send("Sum: " + totalValueSum);}
 			message.channel.send("With modifier: " + totalModified + ".");
+			if (sum === true) {message.channel.send("Sum: " + totalModifiedSum);}
 		}
-		console.log("Output: " + value);
+		console.log("Output: " + totalValue);
 		client.user.setPresence({ game: { name: "Rolled a " + value, type: 0 } });
 		break;
 	}
