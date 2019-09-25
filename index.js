@@ -100,6 +100,9 @@ client.on('message', message => {
 
 		try {
 			times = args[1].replace(/[^0-9]/gi, '');
+			if (message.author.id !== config.ownerID) {
+				if (times > 20) {times = 20;}
+			}
 		} catch (error) {
 			times = 1;
 		}
