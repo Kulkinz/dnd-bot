@@ -65,13 +65,6 @@ client.on('message', message => {
 			addition = 0;
 		}
 
-		// Because someone is going to eventually do it
-		if (number === "ick") {
-			message.channel.send("A dick joke? Really " + playerUsername + "? Low... I took a full night to program this bot and you try to make it say dick? Wow... Im disappointed");
-			console.log(playerUsername + " tried to make a dick joke.");
-			break;
-		}
-
 		// Records number
 		console.log("Input: " + number);
 		console.log("Addition: " + addition);
