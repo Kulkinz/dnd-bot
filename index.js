@@ -206,10 +206,16 @@ client.on('message', message => {
 
 		// Sends to DMs
 		message.author.send("@" + playerUsername + ". The current commands are as follows and I quote;");
-		message.author.send(prefix + "roll d[number]");
-		message.author.send("---Rolls a dice up to the given number.");
+		message.author.send(prefix + "help");
+		message.author.send("---This command");
+		message.author.send(prefix + "roll d[number] <+/-modifier>");
+		message.author.send("---Rolls a dice up to the given number. Can set an optional modifier.");
+		message.author.send(prefix + "multiroll d[number] <amount> <+/-modifier> <sum=true/false>");
+		message.author.send("---Rolls multiple dice up to the given number. Can set amount, modifier, or if you would like to sum the numbers up.");
 		message.author.send(prefix + "github");
 		message.author.send("---Links to the github.");
+		message.author.send(prefix + "ping");
+		message.author.send("---Pong!");
 
 		// If the user is an owner, sends owner commands
 		if (message.author.id == config.ownerID) {
