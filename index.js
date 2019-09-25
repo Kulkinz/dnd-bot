@@ -89,6 +89,12 @@ client.on('message', message => {
 			message.channel.send("Rolled: " + value + ". With modifier: " + modified);
 		}
 		console.log("Output: " + value);
+		client.user.setPresence({ game: { name: "Rolled a " + value, type: 0 } });
+		break;
+	}
+
+	case "ping": {
+		message.channel.send("Pong!");
 		break;
 	}
 
