@@ -207,28 +207,31 @@ client.on('message', message => {
 		// Sends to channel information that it was DM'd
 		message.channel.send("Sent to DMs");
 
-		// Sends to DMs
-		message.author.send("@" + playerUsername + ". The current commands are as follows and I quote;");
-		message.author.send(prefix + "help");
-		message.author.send("---This command");
-		message.author.send(prefix + "roll d[number] <+/-modifier>");
-		message.author.send("---Rolls a dice up to the given number. Can set an optional modifier.");
-		message.author.send(prefix + "multiroll d[number] <amount> <+/-modifier> <sum=true/false>");
-		message.author.send("---Rolls multiple dice up to the given number. Can set amount, modifier, or if you would like to sum the numbers up.");
-		message.author.send(prefix + "github");
-		message.author.send("---Links to the github.");
-		message.author.send(prefix + "ping");
-		message.author.send("---Pong!");
+		// Sends to DMs. Creates embed, and sends it.
+		const helpEmbed = new Discord.RichEmbed()
+			.setColor('#ab2c85')
+			.setTitle("Commands")
+			.setDescription(playerUsername + ". The current commands are as follows and I quote;")
+			.addField(prefix + "help", "This command.")
+			.addField(prefix + "roll d[number] <+/-modifier>", "Rolls a dice up to the given number. Can set an optional modifier.")
+			.addField(prefix + "multiroll d[number] <amount> <+/-modifier> <sum=true/false>", "Rolls multiple dice up to the given number. Can set amount, modifier, or if you would like to sum the numbers up.")
+			.addField(prefix + "github", "Links to the github.")
+			.addField(prefix + "ping", "Pong!")
+			.setTimestamp();
 
-		// If the user is an owner, sends owner commands
+		message.author.send(helpEmbed);
+
+		// Admin commands
+		const adminEmbed = new Discord.RichEmbed()
+			.setColor('f542b9')
+			.setTitle("Admin Commands")
+			.addField(prefix + "prefix [Prefix]", "Changes Prefix.")
+			.setTimestamp();
+
+		// If the user is an owner, sends owner commands.
 		if (message.author.id == config.ownerID) {
-			message.author.send("--------ADMIN COMMANDS--------");
-			message.author.send(prefix + "prefix [Prefix]");
-			message.author.send("---Changes Prefix.");
+			message.author.send(adminEmbed);
 		}
-
-		// States that all commands are sent. Sent regardless of owner or not
-		message.author.send("--------END OF COMMANDS--------");
 		break;
 	}
 	}
