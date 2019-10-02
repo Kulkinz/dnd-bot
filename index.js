@@ -190,6 +190,13 @@ client.on('message', message => {
 		break;
 	}
 
+	// Secret command. Cole wanted a pong command.
+
+	case "pong": {
+		message.channel.send("the same thing as ping - Cole Dewis 2019");
+		break;
+	}
+
 	case "prefix": {
 		// Condition is if the person sending is the owner based on id
 		if (message.author.id == config.ownerID) {
