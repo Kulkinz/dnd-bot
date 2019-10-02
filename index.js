@@ -284,7 +284,7 @@ client.on('message', message => {
 			break;
 		}
 
-		// Sends link to respective xkcd comic
+		// Sends link to respective xkcd what-if
 		message.channel.send("https://what-if.xkcd.com/" + whatif + "/");
 		break;
 	}
@@ -302,6 +302,8 @@ client.on('message', message => {
 			.addField(prefix + "help", "This command.")
 			.addField(prefix + "roll d[number] <+/-modifier>", "Rolls a dice up to the given number. Can set an optional modifier.")
 			.addField(prefix + "multiroll d[number] <amount> <+/-modifier> <sum=true/false>", "Rolls multiple dice up to the given number. Can set amount, modifier, or if you would like to sum the numbers up.")
+			.addField(prefix + "xkcd [number]", "Pulls up the respective xkcd comic.")
+			.addField(prefix + "whatif [number]", "Pulls up the respective xkcd what if?.")
 			.addField(prefix + "github", "Links to the github.")
 			.addField(prefix + "ping", "Pong!")
 			.setTimestamp();
