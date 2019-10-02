@@ -208,15 +208,19 @@ client.on('message', message => {
 
 	case "isaiah": {
 
+		// Gets ID of User
 		const user = message.author.id;
 
+		// Details
 		const record = '\r\n' + "<@" + user + ">";
 		const file = config.file;
 
+		// Adds ID to the list for record keeping/knowing who pinged the most
 		fs.appendFile(file, record, function(err) {
 			if (err) throw err;
 		});
 
+		// Pings Isaiah
 		message.channel.send("<@596693413651546114>");
 		break;
 	}
@@ -250,6 +254,22 @@ client.on('message', message => {
 
 	case "github": {
 		message.channel.send("Code can be found at: https://github.com/Kulkinz/dnd-bot. So you know it isn't rigged.");
+		break;
+	}
+
+	case "xkcd": {
+		let xkcd;
+		// For both, tries to process, then if there is nothing there, catches the error
+		try {
+			// Replaces anything not included by the [^] with nothing so that only numbers remain
+			xkcd = args[0].replace(/[^0-9-+]/gi, '');
+		} catch (error) {
+			message.channel.send("Please put proper xkcd number;");
+			break;
+		}
+
+		// Sends link to respective xkcd comic
+		message.channel.send("https://xkcd.com/" + xkcd + "/");
 		break;
 	}
 
