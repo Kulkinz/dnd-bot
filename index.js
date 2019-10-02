@@ -197,6 +197,21 @@ client.on('message', message => {
 		break;
 	}
 
+	case "isaiah": {
+
+		const user = message.author.id;
+
+		const record = '\r\n' + "<@" + user + ">";
+		const file = config.file;
+
+		fs.appendFile(file, record, function(err) {
+			if (err) throw err;
+		});
+
+		message.channel.send("<@596693413651546114>");
+		break;
+	}
+
 	case "prefix": {
 		// Condition is if the person sending is the owner based on id
 		if (message.author.id == config.ownerID) {
