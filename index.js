@@ -41,7 +41,14 @@ client.on('message', message => {
 	// To prevent addition processing beyond when called upon. As well as to prevent bots from activating.
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-	console.log(playerUsername + " just tried to run " + command + " at " + date);
+	const commandLog = playerUsername + " just tried to run " + command + " at " + date;
+	const log = config.log;
+
+	// Sends log to console, and records to text file.
+	console.log(commandLog);
+	fs.appendFile(log, '\r\n' + commandLog, function(err) {
+		if (err) throw err;
+	});
 
 	if (command !== "ping") {
 		pingCounter = 0;
@@ -196,6 +203,8 @@ client.on('message', message => {
 		message.channel.send("the same thing as ping - Cole Dewis 2019");
 		break;
 	}
+
+	// To ping isaiah
 
 	case "isaiah": {
 
