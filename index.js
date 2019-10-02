@@ -22,6 +22,8 @@ client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
 
+let pingCounter = 0;
+
 // Runs when message is sent
 client.on('message', message => {
 
@@ -40,6 +42,10 @@ client.on('message', message => {
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
 	console.log(playerUsername + " just tried to run " + command + " at " + date);
+
+	if (command !== "ping") {
+		pingCounter = 0;
+	}
 
 	switch(command) {
 
@@ -166,7 +172,21 @@ client.on('message', message => {
 	}
 
 	case "ping": {
-		message.channel.send("Pong!");
+		if (pingCounter == 7) {
+			message.channel.send("Im still alive okay?");
+			pingCounter++;
+		} else if (pingCounter == 12) {
+			message.channel.send("Plz stop");
+			pingCounter++;
+		} else if (pingCounter >= 15) {
+			pingCounter++;
+		} else {
+			message.channel.send("Pong!").then((msg) => {
+				// Amends message with the time taken.
+				msg.edit("Pong! Took " + (new Date().getTime() - message.createdTimestamp) + " ms to respond");
+			});
+			pingCounter++;
+		}
 		break;
 	}
 
