@@ -273,6 +273,22 @@ client.on('message', message => {
 		break;
 	}
 
+	case "whatif": {
+		let whatif;
+		// For both, tries to process, then if there is nothing there, catches the error
+		try {
+			// Replaces anything not included by the [^] with nothing so that only numbers remain
+			whatif = args[0].replace(/[^0-9-+]/gi, '');
+		} catch (error) {
+			message.channel.send("Please put proper xkcd what if? number;");
+			break;
+		}
+
+		// Sends link to respective xkcd comic
+		message.channel.send("https://what-if.xkcd.com/" + whatif + "/");
+		break;
+	}
+
 	case "help": {
 
 		// Sends to channel information that it was DM'd
