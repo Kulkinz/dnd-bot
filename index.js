@@ -7,7 +7,8 @@ const fs = require('fs');
 // Runs when activated
 client.once("ready", () => {
 	console.log("Ready!");
-	client.user.setPresence({ game: { name: "Rolling a 1", type: 0 } });
+	var value = Math.floor(Math.random() * (20)) + 1;
+	client.user.setPresence({ game: { name: "Rolled a " + value, type: 0 } });
 	client.user.setStatus("online");
 });
 
