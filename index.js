@@ -10,6 +10,7 @@ client.once("ready", () => {
 	var value = Math.floor(Math.random() * (20)) + 1;
 	client.user.setPresence({ game: { name: "Rolled a " + value, type: 0 } });
 	client.user.setStatus("online");
+	
 });
 
 // Runs when disconnecting
@@ -270,7 +271,19 @@ client.on('message', message => {
 		}
 
 		// Sends link to respective xkcd comic
-		message.channel.send("https://xkcd.com/" + xkcd + "/");
+		var request;
+		if(window.XMLHttpRequest)
+			request = new XMLHttpRequest();
+		else
+			request = new ActiveXObject("Microsoft.XMLHTTP");
+		request.open('GET', 'http://www.mozilla.org', false);
+		request.send();
+		if (request.status !== 404) {
+			message.channel.send("https://xkcd.com/" + xkcd + "/");
+		}
+		else {
+			message.channel.send("That xkcd does not exist.");
+		}
 		break;
 	}
 
@@ -286,7 +299,19 @@ client.on('message', message => {
 		}
 
 		// Sends link to respective xkcd what-if
-		message.channel.send("https://what-if.xkcd.com/" + whatif + "/");
+		var request;
+		if(window.XMLHttpRequest)
+			request = new XMLHttpRequest();
+		else
+			request = new ActiveXObject("Microsoft.XMLHTTP");
+		request.open('GET', 'http://www.mozilla.org', false);
+		request.send();
+		if (request.status !== 404) {
+			message.channel.send("https://what-if.xkcd.com/" + whatif + "/");
+		}
+		else {
+			message.channel.send("That xkcd what if? does not exist.");
+		}
 		break;
 	}
 
