@@ -40,6 +40,15 @@ client.on('message', message => {
 	const time = new Date().getTime();
 	const date = new Date(time);
 
+	if (message.channel.id == '663516517798772786') {
+		switch(message.startsWith) {
+			case "172":
+				message.channel.send("173");
+			case "178":
+				message.channel.send("Children of the Swamp");
+		}
+	}
+
 	// To prevent addition processing beyond when called upon. As well as to prevent bots from activating.
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
