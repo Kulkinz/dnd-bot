@@ -41,7 +41,7 @@ client.on('message', message => {
 	const date = new Date(time);
 
 	if (message.channel.id == '663516517798772786') {
-		switch(message.startsWith) {
+		switch(message.content.toLowerCase) {
 			case "172":
 				message.channel.send("173");
 			case "178":
