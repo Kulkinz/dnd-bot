@@ -40,13 +40,19 @@ client.on('message', message => {
 	const time = new Date().getTime();
 	const date = new Date(time);
 
-	if (message.channel.id == "663516517798772786") {
-		switch(message.content.toLowerCase) {
-			case "172":
-				message.channel.send("173");
-			case "178":
-				message.channel.send("Children of the Swamp");
-		}
+	// if (message.channel.id == "663516517798772786") {
+	// 	switch(message.content.toLowerCase) {
+	// 		case "172":
+	// 			message.channel.send("173");
+	// 			break;
+	// 		case "178":
+	// 			message.channel.send("Children of the Swamp");
+	// 			break;
+	// 	}
+	// }
+
+	if (message.content.startsWith("178")) {
+		message.channel.send("Children of the Swamp");
 	}
 
 	// To prevent addition processing beyond when called upon. As well as to prevent bots from activating.
